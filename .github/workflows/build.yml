@@ -165,15 +165,15 @@ jobs:
           cd kernel_workspace
           curl -LSs "https://raw.githubusercontent.com/rsuntk/KernelSU/main/kernel/setup.sh" | bash -s susfs-main
 
-      - name: 应用 KernelSU & SUSFS 补丁
-        run: |
-          cd kernel_workspace
-          git clone https://gitlab.com/simonpunk/susfs4ksu.git -b gki-${{ env.ANDROID_VERSION }}-${{ env.KERNEL_VERSION }}
+      #- name: 应用 KernelSU & SUSFS 补丁
+      #  run: |
+      #    cd kernel_workspace
+      #    git clone https://gitlab.com/simonpunk/susfs4ksu.git -b gki-${{ env.ANDROID_VERSION }}-${{ env.KERNEL_VERSION }}
           
-          cp ./susfs4ksu/kernel_patches/50_add_susfs_in_gki-android12-5.10.patch ./common/
+      #    cp ./susfs4ksu/kernel_patches/50_add_susfs_in_gki-android12-5.10.patch ./common/
 
-          cd ./common
-          patch -p1 --fuzz=3 < 50_add_susfs_in_gki-android12-5.10.patch || true
+      #    cd ./common
+      #    patch -p1 --fuzz=3 < 50_add_susfs_in_gki-android12-5.10.patch || true
           
       - name: 应用lz4 1.10.0 & zstd 1.5.7补丁
         run: |
