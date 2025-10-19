@@ -135,7 +135,7 @@ jobs:
           echo "正在克隆源码仓库..."
           aria2c -s16 -x16 -k1M https://github.com/ztc1997/android_gki_kernel_5.10_common/archive/refs/heads/android12-5.10-2025-09.zip -o common.zip && 
           unzip -q common.zip && 
-          mv "android12-5.10-2025-09" common &&
+          mv "android_gki_kernel_5.10_common-android12-5.10-2025-09" common &&
           rm -rf common.zip &
           
           echo "正在克隆llvm-Clang20工具链..." &&
