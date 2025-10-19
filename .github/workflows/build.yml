@@ -80,7 +80,7 @@ jobs:
           sudo apt-get install -y --no-install-recommends \
             curl bison flex make binutils git perl gcc python3 \
             python-is-python3 bc libssl-dev libelf-dev \
-            bc aria2 zip unzip ccache
+            bc aria2 zip unzip ccache binutils-aarch64-linux-gnu
 
       - name: 配置ccache目录
         run: |
@@ -392,6 +392,9 @@ jobs:
           export CCACHE_HARDLINK="true"
           export CCACHE_DIR="${{ env.CCACHE_DIR }}"
           export CCACHE_MAXSIZE="3G"
+          export AS=aarch64-linux-gnu-as
+          export LD=aarch64-linux-gnu-ld
+
           
           cd kernel_workspace/common
           #在构建内核的同时清除不必要的.NET, Android NDK, Haskell, CodeQL运行库，清理空间且不阻塞后续步骤运行
