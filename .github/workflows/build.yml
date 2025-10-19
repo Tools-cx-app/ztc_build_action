@@ -332,26 +332,7 @@ jobs:
             echo "CONFIG_BBG=y" >> ./common/arch/arm64/configs/gki_defconfig
             cd ./common/
             wget -O- https://github.com/vc-teahouse/Baseband-guard/raw/main/setup.sh | bash
-            sed -i '/^config LSM$/,/^help$/{ /^[[:space:]]*default/ { /baseband_guard/! s/lockdown/lockdown,baseband_guard/ } }' ./Kconfig
-            awk '
-            /endmenu/ { last_endmenu_line = NR }
-            { lines[NR] = $0 }
-            END {
-              for (i=1; i<=NR; i++) {
-                if (i == last_endmenu_line) {
-                  sub(/endmenu/, "", lines[i]);
-                  print lines[i] "source \"security/baseband-guard/Kconfig\""
-                  print ""
-                  print "endmenu"
-                } else {
-                    print lines[i]
-                }
-              }
-            }
-            ' ./Kconfig > Kconfig.tmp && mv Kconfig.tmp ./Kconfig
-            sed -i 's/selinuxfs.o //g' "./selinux/Makefile"
-            sed -i 's/hooks.o //g' "./selinux/Makefile"
-            cat "./baseband-guard/sepatch.txt" >> "./selinux/Makefile"
+            sed -i '/^config LSM$/,/^help$/{ /^[[:space:]]*default/ { /baseband_guard/! s/lockdown/lockdown,baseband_guard/ } }' security/Kconfig
           fi
 
       - name: 添加制作名称
