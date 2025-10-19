@@ -399,6 +399,9 @@ jobs:
           sudo rm -rf /usr/local/lib/android &
           sudo rm -rf /opt/ghc &
           sudo rm -rf /opt/hostedtoolcache/CodeQL &
+          #删除-fno-integrated-as强制检查
+          sed -i 's/-fno-integrated-as//' scripts/Kconfig.include
+          
           make -j$(nproc --all) LLVM=1 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- CC="ccache clang" LD=ld.lld HOSTLD=ld.lld O=out KCFLAGS+=-O2 KCFLAGS+=-Wno-error gki_defconfig Image
           echo "内核编译完成！"
           echo "ccache状态："
