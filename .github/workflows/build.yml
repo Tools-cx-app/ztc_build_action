@@ -4,7 +4,7 @@ env:
   TZ: Asia/Shanghai
   ANDROID_VERSION: 'android12'
   KERNEL_VERSION: '5.10'
-  KERNEL_NAME: 'android12-localhost-Hutao'
+  KERNEL_NAME: '5.10.236-localhost-Hutao'
 
 on:
   workflow_dispatch:
