@@ -9,15 +9,6 @@ env:
 on:
   workflow_dispatch:
     inputs:
-      hook_method:
-        description: hook模式(大部分情况manual即可，若新版manual钩子出现问题可尝试syscall, 少数需切换sus su模式的场景才需要kprobes钩子)
-        required: true
-        type: choice
-        default: 'manual'
-        options:
-          - 'manual'
-          - 'syscall'
-          - 'kprobes'
       lz4_enable:
         description: '是否安装 lz4 1.10.0+zstd 1.5.7 补丁及 LZ4KD 补丁(0=均不安装,1=安装lz4&zstd补丁,2=安装lz4kd补丁,3=均安装,默认1)'
         required: true
@@ -215,16 +206,9 @@ jobs:
         run: |
           cd kernel_workspace
           echo "CONFIG_KSU=y" >> ./common/arch/arm64/configs/gki_defconfig
-          if [ "${{ github.event.inputs.hook_method }}" == "kprobes" ]; then
-            echo "正在开启kprobes钩子..."
-            echo "CONFIG_KSU_SUSFS_SUS_SU=y" >> ./common/arch/arm64/configs/gki_defconfig
-            echo "CONFIG_KSU_MANUAL_HOOK=n" >> ./common/arch/arm64/configs/gki_defconfig
-            echo "CONFIG_KSU_KPROBES_HOOK=y" >> ./common/arch/arm64/configs/gki_defconfig
-          else
-            echo "正在开启manual/syscall钩子..."
-            echo "CONFIG_KSU_MANUAL_HOOK=y" >> ./common/arch/arm64/configs/gki_defconfig
-            echo "CONFIG_KSU_SUSFS_SUS_SU=n" >> ./common/arch/arm64/configs/gki_defconfig
-          fi
+          echo "正在开启manual钩子..."
+          echo "CONFIG_KSU_MANUAL_HOOK=y" >> ./common/arch/arm64/configs/gki_defconfig
+          echo "CONFIG_KSU_SUSFS_SUS_SU=n" >> ./common/arch/arm64/configs/gki_defconfig
           echo "CONFIG_KSU_SUSFS=y" >> ./common/arch/arm64/configs/gki_defconfig
           echo "CONFIG_KSU_SUSFS_HAS_MAGIC_MOUNT=y" >> ./common/arch/arm64/configs/gki_defconfig
           echo "CONFIG_KSU_SUSFS_SUS_PATH=y" >> ./common/arch/arm64/configs/gki_defconfig
