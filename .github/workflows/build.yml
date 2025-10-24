@@ -97,10 +97,8 @@ jobs:
         id: ccache-restore
         with:
           path: ${{ env.CCACHE_DIR }}
-          key: ccache-new-6.1.57-${{ runner.os }}-main
-          restore-keys: |
-            ccache-new-6.1.57-${{ runner.os }}-
-            ccache-new-6.1.57-
+          key: ccache-ztc
+          restore-keys: ccache-ztc
       
       - name: 初始化并配置ccache
         run: |
@@ -370,8 +368,6 @@ jobs:
           export CCACHE_HARDLINK="true"
           export CCACHE_DIR="${{ env.CCACHE_DIR }}"
           export CCACHE_MAXSIZE="3G"
-          export AS=aarch64-linux-gnu-as
-          export LD=aarch64-linux-gnu-ld
 
           
           cd kernel_workspace/common
