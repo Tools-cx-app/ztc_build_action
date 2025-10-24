@@ -37,7 +37,7 @@ on:
           - 'true'
           - 'false'
       rekernel_enable:
-        description: '1=安装Re-Kernel,0=不安装默认1)'
+        description: '是否安装Rekernel'
         required: true
         type: choice
         default: '1'
