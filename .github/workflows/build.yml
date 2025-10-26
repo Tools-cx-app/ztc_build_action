@@ -184,7 +184,7 @@ jobs:
           if [[ "${{ github.event.inputs.schedhorizon_enable }}" == "true" ]]; then
             cd kernel_workspace
             echo "下载相关文件"
-            curl -LSs https://raw.githubusercontent.com/Tools-cx-app/esk_build_action/main/patches/schedhorizon/cpufreq_schedhorizon.c -o common/kernel/sched/cpufreq_schedhorizon.c
+            curl -LSs https://raw.githubusercontent.com/Tools-cx-app/ztc_build_action/main/patches/schedhorizon/cpufreq_schedhorizon.c -o common/kernel/sched/cpufreq_schedhorizon.c
             #curl -LSs https://raw.githubusercontent.com/Tools-cx-app/esk_build_action/main/patches/schedhorizon/sched.h -o common/kernel/sched/sched.h
             echo "写入补丁"
             echo "obj-\$\(CONFIG_CPU_FREQ_GOV_SCHEDHORIZON\) += cpufreq_schedhorizon.o" >> common/kernel/sched/Makefile
